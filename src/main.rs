@@ -3,6 +3,7 @@ fn main() {
     vars();
     print_const();
     func_with_params(150);
+    test123();
 }
 
 fn vars() {
@@ -30,6 +31,8 @@ fn test123() -> i32 {
         let x = 3;
         x + 1
     };
+
+    let a = [2; 10];
 
     x + y
 }
