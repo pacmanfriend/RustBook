@@ -1,38 +1,38 @@
+use std::io;
+use rand::Rng;
+use std::cmp::Ordering;
+
 fn main() {
-    println!("Hello, world!");
-    vars();
-    print_const();
-    func_with_params(150);
-    test123();
-}
+    let secret_number = rand::thread_rng().gen_range(1..=100);
 
-fn vars() {
-    let mut a: i32 = 5;
-    println!("a is {}", a);
+    println!("Угадайте число!");
 
-    a = 6;
-    println!("a is {} ", a);
-}
+    loop {
+        println!("Введите загаданное число:");
 
-const A: i32 = 1024;
+        let mut guess = String::new();
 
-fn print_const() {
-    println!("Const A is {}", A)
-}
+        io::stdin().read_line(&mut guess)
+            .expect("Не удалось прочитать строку!");
 
-fn func_with_params(x: i32) {
-    println!("Param x is {}", x);
-}
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Введите число!");
+                continue;
+            }
+        };
 
-fn test123() -> i32 {
-    let x = 6;
 
-    let y = {
-        let x = 3;
-        x + 1
-    };
+        println!("Вы ввели: {guess}");
 
-    let a = [2; 10];
-
-    x + y
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Слишком малое число!"),
+            Ordering::Greater => println!("Слишком большое число!"),
+            Ordering::Equal => {
+                println!("Вы выиграли!");
+                break;
+            }
+        }
+    }
 }
