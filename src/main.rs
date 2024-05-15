@@ -3,6 +3,10 @@ use rand::Rng;
 use std::cmp::Ordering;
 
 fn main() {
+    rectangle_area_calculator()
+}
+
+fn _game() {
     let secret_number = rand::thread_rng().gen_range(1..=100);
 
     println!("Угадайте число!");
@@ -35,4 +39,18 @@ fn main() {
             }
         }
     }
+}
+
+struct Rectangle(i32, i32);
+
+fn rectangle_area_calculator() {
+    let rect = Rectangle(30, 50);
+
+    let rect_area = area(rect);
+
+    println!("Площадь прямоугольника равна: {rect_area}")
+}
+
+fn area(rect: Rectangle) -> i32 {
+    rect.0 * rect.1
 }
